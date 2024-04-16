@@ -1,6 +1,7 @@
 <script setup>
 import jsonSchedule from './mock/schedule.json';
 import { ref, computed } from 'vue';
+import BaseConfirm from './components/BaseConfirm.vue';
 
 const schedule = ref(jsonSchedule);
 
@@ -18,9 +19,34 @@ const scheduleFiltered = computed(() => {
   }) : scheduleOrderByDate.value;
 });
 
+let currentSchedule = null;
+const showConfirm = ref(false);
+
+function deleteSomething() {
+  showConfirm.value = false;
+  schedule.value = schedule.value.filter(item => item !== currentSchedule);
+}
+
+function askConfirmation(item) {
+  currentSchedule = item
+  showConfirm.value = true;
+}
+
+function closeConfirm() {
+  showConfirm.value = false;
+}
+
 </script>
 
 <template>
+
+  <BaseConfirm
+      v-if="showConfirm"
+      @confirm="deleteSomething()"
+      @cancel="closeConfirm()">
+    Are you <b>sure</b> you want to delete this item?
+  </BaseConfirm>
+
   <button @click="hideHistory = !hideHistory">
     {{ hideHistory ? 'Show' : 'Hide' }} History
   </button>
@@ -28,6 +54,7 @@ const scheduleFiltered = computed(() => {
     <li v-for="item in scheduleFiltered" :key="item.id">
       {{ item.label }}
       {{  item.start }}
+      <button @click="askConfirmation(item)">delete</button>
     </li>
   </ul>
 </template>

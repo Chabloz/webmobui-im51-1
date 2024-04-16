@@ -22,7 +22,7 @@
 
 <template>
   <div>
-    <input type="number" v-model="model">
+    <input type="number" v-model="model" v-bind="$attrs">
     <span v-if="unit">{{ unit }}</span>
   </div>
 </template>
