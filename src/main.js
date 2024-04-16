@@ -1,6 +1,4 @@
 import { createApp } from 'vue';
-import './style.css';
-// import App from './AppTemperature.vue';
-import App from './AppSchedule.vue';
+import App from './App.vue';
 
 createApp(App).mount('#app');
