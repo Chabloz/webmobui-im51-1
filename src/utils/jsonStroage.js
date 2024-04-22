@@ -4,7 +4,7 @@ export function setItem(key, value) {
 
 export function getItem(key, defaultValue = null) {
   // if no data in localStorage, return the defaul value
-  if (localStorage.getItem(key) === null) return defaultValue;
+  if (localStorage.getItem(key) === null) setItem(key, defaultValue);
 
   let data;
   try {
