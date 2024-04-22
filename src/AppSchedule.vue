@@ -1,8 +1,9 @@
 <script setup>
 import jsonSchedule from './mock/schedule.json';
-import { ref, computed } from 'vue';
+import { ref, computed, onUnmounted } from 'vue';
 import BaseConfirm from './components/BaseConfirm.vue';
-import { useJsonStorage } from './composables/jsonStorage';
+import { useJsonStorage } from './composables/jsonStorage.js';
+import { useKeyboard } from './composables/keyboard.js';
 
 const schedule = ref(jsonSchedule);
 
@@ -39,6 +40,25 @@ function askConfirmation(item) {
 function closeConfirm() {
   showConfirm.value = false;
 }
+
+// window.addEventListener("keyup", (event) => {
+//   console.log(event.key.toUpperCase())
+//   const k = event.key.toUpperCase();
+//   if (k != "H") return;
+
+//   hideHistory.value = !hideHistory.value;
+// });
+
+const { keyboard } = useKeyboard();
+keyboard.onKey("h", () => {
+  console.log("H pressed");
+  hideHistory.value = !hideHistory.value;
+});
+keyboard.onKeys(['Control', 's'], () => {
+  console.log("ctrl + s pressed");
+});
+
+
 
 </script>
 
