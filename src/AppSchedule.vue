@@ -14,7 +14,7 @@ const scheduleOrderByDate = computed(() => {
 
 const {data: hideHistory} = useJsonStorage("showHistory", true);
 
-const {data: selectedCourse} = useJsonStorage("selectedCours", null);
+const {data: selectedCourse} = useJsonStorage("selectedCourse", null);
 selectedCourse.value = "WebMobUi";
 
 const scheduleFiltered = computed(() => {
