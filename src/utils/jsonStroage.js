@@ -3,6 +3,9 @@ export function setItem(key, value) {
 }
 
 export function getItem(key, defaultValue = null) {
+  // if no data in localStorage, return the defaul value
+  if (localStorage.getItem(key) === null) return defaultValue;
+
   let data;
   try {
     data = JSON.parse(localStorage.getItem(key));
